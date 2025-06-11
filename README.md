@@ -112,6 +112,168 @@ lib/
 │   ├── dashboards/
 ├── main.dart
 ```
+---
+بالتأكيد! لتسهيل عملية إنشاء جميع المجلدات والملفات في Flutter، يمكنك استخدام سكريبت بسيط لـ PowerShell. هذا السكريبت سيقوم بإنشاء هيكل المجلدات ثم إنشاء ملفات `lib/models`, `lib/config`, `lib/services`, `lib/providers`, و `lib/screens` (بما في ذلك المجلدات الفرعية).
+
+**ملاحظة هامة:**
+
+*   تأكد من أنك في **جذر مشروع Flutter** الخاص بك (حيث يوجد ملف `pubspec.yaml`) قبل تنفيذ هذا السكريبت.
+*   هذا السكريبت سينشئ فقط الملفات والمجلدات. يجب عليك لاحقًا **نسخ ولصق المحتوى** الذي قدمته لك في الإجابات السابقة داخل هذه الملفات.
+*   `Set-Content -Path $filePath -Value ""` ينشئ ملفًا فارغًا.
+
+---
+
+**تعليمات إنشاء الملفات والمجلدات (PowerShell Script):**
+
+افتح ملف PowerShell جديد (مثلاً، باسم `create_flutter_files.ps1`) والصق فيه الكود التالي:
+
+**`create_flutter_files.ps1`**
+
+```powershell
+# Get the current directory (should be the Flutter project root)
+$projectRoot = Get-Location
+
+Write-Host "Creating Flutter project structure in: $projectRoot"
+
+# --- 1. Create Core Directories ---
+$baseDirs = @(
+    "lib/config",
+    "lib/services",
+    "lib/models",
+    "lib/providers",
+    "lib/screens/auth",
+    "lib/screens/dashboards"
+)
+
+foreach ($dir in $baseDirs) {
+    $fullPath = Join-Path $projectRoot $dir
+    if (-not (Test-Path $fullPath)) {
+        New-Item -ItemType Directory -Path $fullPath | Out-Null
+        Write-Host "Created directory: $dir"
+    } else {
+        Write-Host "Directory already exists: $dir"
+    }
+}
+
+# --- 2. Create Config Files ---
+$configFiles = @(
+    "lib/config/env.dart",
+    "lib/config/config.dart"
+)
+
+foreach ($file in $configFiles) {
+    $filePath = Join-Path $projectRoot $file
+    if (-not (Test-Path $filePath)) {
+        Set-Content -Path $filePath -Value "" | Out-Null
+        Write-Host "Created file: $file"
+    } else {
+        Write-Host "File already exists: $file"
+    }
+}
+
+# --- 3. Create Service Files ---
+$serviceFiles = @(
+    "lib/services/api_service.dart"
+)
+
+foreach ($file in $serviceFiles) {
+    $filePath = Join-Path $projectRoot $file
+    if (-not (Test-Path $filePath)) {
+        Set-Content -Path $filePath -Value "" | Out-Null
+        Write-Host "Created file: $file"
+    } else {
+        Write-Host "File already exists: $file"
+    }
+}
+
+# --- 4. Create Model Files ---
+$modelFiles = @(
+    "lib/models/api_response.dart",
+    "lib/models/pagination.dart",
+    "lib/models/specialization.dart",
+    "lib/models/doctor_profile.dart",
+    "lib/models/user.dart",
+    "lib/models/payment.dart",
+    "lib/models/appointment.dart",
+    "lib/models/doctor_availability.dart",
+    "lib/models/message.dart",
+    "lib/models/prescription.dart",
+    "lib/models/consultation.dart",
+    "lib/models/faq.dart",
+    "lib/models/public_question.dart",
+    "lib/models/public_question_answer.dart",
+    "lib/models/blog_post.dart",
+    "lib/models/blog_comment.dart"
+)
+
+foreach ($file in $modelFiles) {
+    $filePath = Join-Path $projectRoot $file
+    if (-not (Test-Path $filePath)) {
+        Set-Content -Path $filePath -Value "" | Out-Null
+        Write-Host "Created file: $file"
+    } else {
+        Write-Host "File already exists: $file"
+    }
+}
+
+# --- 5. Create Provider Files ---
+$providerFiles = @(
+    "lib/providers/auth_provider.dart",
+    "lib/providers/general_data_provider.dart",
+    "lib/providers/patient_provider.dart",
+    "lib/providers/doctor_provider.dart"
+)
+
+foreach ($file in $providerFiles) {
+    $filePath = Join-Path $projectRoot $file
+    if (-not (Test-Path $filePath)) {
+        Set-Content -Path $filePath -Value "" | Out-Null
+        Write-Host "Created file: $file"
+    } else {
+        Write-Host "File already exists: $file"
+    }
+}
+
+# --- 6. Create Screen Files ---
+$screenFiles = @(
+    "lib/screens/loading_screen.dart",
+    "lib/screens/dashboard_screen.dart",
+    "lib/screens/auth/login_screen.dart",
+    "lib/screens/auth/register_screen.dart",
+    "lib/screens/dashboards/patient_dashboard_screen.dart",
+    "lib/screens/dashboards/doctor_dashboard_screen.dart"
+)
+
+foreach ($file in $screenFiles) {
+    $filePath = Join-Path $projectRoot $file
+    if (-not (Test-Path $filePath)) {
+        Set-Content -Path $filePath -Value "" | Out-Null
+        Write-Host "Created file: $file"
+    } else {
+        Write-Host "File already exists: $file"
+    }
+}
+
+Write-Host "File structure creation complete. Remember to copy and paste the code into the new files."
+```
+
+---
+
+**كيفية تنفيذ السكريبت:**
+
+1.  **احفظ الكود أعلاه** في ملف جديد باسم `create_flutter_files.ps1` (أو أي اسم آخر ينتهي بـ `.ps1`). احفظه في نفس مجلد مشروع Flutter الخاص بك.
+2.  **افتح PowerShell** (يمكنك البحث عنه في قائمة "Start" في Windows).
+3.  **انتقل إلى مجلد مشروع Flutter الخاص بك** في PowerShell باستخدام الأمر `cd`. على سبيل المثال:
+    ```powershell
+    cd C:\path\to\your_doctor_app_flutter
+    ```
+4.  **نفذ السكريبت** باستخدام الأمر التالي:
+    ```powershell
+    .\create_flutter_files.ps1
+    ```
+    (ملاحظة: إذا واجهت مشكلة في الأذونات، قد تحتاج إلى تشغيل PowerShell كمسؤول، أو تغيير سياسة التنفيذ مؤقتًا باستخدام `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` ثم إعادتها بعد الانتهاء).
+
+بعد تشغيل السكريبت، سيتم إنشاء جميع المجلدات والملفات الفارغة. الخطوة التالية والأخيرة هي **نسخ ولصق المحتوى** الذي قدمته لك في الإجابات السابقة إلى الملفات المقابلة.
 
 ---
 
@@ -446,7 +608,8 @@ class Specialization {
 
 ```dart
 import 'dart:convert';
-import 'specialization.dart'; // Make sure to import Specialization
+import 'specialization.dart'; // تأكد من استيراد Specialization
+import 'user.dart'; // >>> هام: استيراد نموذج User هنا <<<
 
 class DoctorProfile {
   final int id;
@@ -456,7 +619,8 @@ class DoctorProfile {
   final int yearsExperience;
   final double consultationFee;
   final String profilePictureUrl;
-  final Specialization? specialization; // Nullable if not always loaded
+  final Specialization? specialization; // قابلة للقيمة Null
+  final User? user; // >>> تمت إضافة هذه الخاصية: المستخدم المرتبط بملف الطبيب <<<
 
   DoctorProfile({
     required this.id,
@@ -467,6 +631,7 @@ class DoctorProfile {
     required this.consultationFee,
     required this.profilePictureUrl,
     this.specialization,
+    this.user, // >>> تمت إضافتها إلى المُنشئ <<<
   });
 
   factory DoctorProfile.fromMap(Map<String, dynamic> map) {
@@ -481,6 +646,9 @@ class DoctorProfile {
       specialization: map['specialization'] != null
           ? Specialization.fromMap(map['specialization'] as Map<String, dynamic>)
           : null,
+      user: map['user'] != null // >>> تمت إضافة منطق التحليل من الخريطة <<<
+          ? User.fromMap(map['user'] as Map<String, dynamic>)
+          : null,
     );
   }
 
@@ -494,6 +662,7 @@ class DoctorProfile {
       'consultationFee': consultationFee,
       'profilePictureUrl': profilePictureUrl,
       'specialization': specialization?.toMap(),
+      'user': user?.toMap(), // >>> تمت إضافتها إلى toMap <<<
     };
   }
 
@@ -515,7 +684,7 @@ class User {
   final String? phone; // Nullable in Laravel, so nullable in Dart
   final String role;
   final bool isActive;
-  final DateTime createdAt;
+  final DateTime created_at;
   final DoctorProfile? doctorProfile; // Nullable, as not all users are doctors
 
   User({
@@ -525,7 +694,7 @@ class User {
     this.phone,
     required this.role,
     required this.isActive,
-    required this.createdAt,
+    required this.created_at,
     this.doctorProfile,
   });
 
@@ -537,7 +706,7 @@ class User {
       phone: map['phone'] as String?, // Cast to String?
       role: map['role'] as String,
       isActive: map['isActive'] as bool,
-      createdAt: DateTime.parse(map['createdAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
       doctorProfile: map['doctorProfile'] != null
           ? DoctorProfile.fromMap(map['doctorProfile'] as Map<String, dynamic>)
           : null,
@@ -552,7 +721,7 @@ class User {
       'phone': phone,
       'role': role,
       'isActive': isActive,
-      'createdAt': createdAt.toIso8601String(),
+      'created_at': created_at.toIso8601String(),
       'doctorProfile': doctorProfile?.toMap(),
     };
   }
@@ -583,8 +752,8 @@ class PaymentSimple {
   final int? consultationId;
   final int? appointmentId;
   final DateTime? paymentDate;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime created_at;
+  final DateTime updated_at;
 
   PaymentSimple({
     required this.id,
@@ -598,8 +767,8 @@ class PaymentSimple {
     this.consultationId,
     this.appointmentId,
     this.paymentDate,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.created_at,
+    required this.updated_at,
   });
 
   factory PaymentSimple.fromMap(Map<String, dynamic> map) {
@@ -615,8 +784,8 @@ class PaymentSimple {
       consultationId: map['consultationId'] as int?,
       appointmentId: map['appointmentId'] as int?,
       paymentDate: map['paymentDate'] != null ? DateTime.parse(map['paymentDate'] as String) : null,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
     );
   }
 
@@ -633,8 +802,8 @@ class PaymentSimple {
       'consultationId': consultationId,
       'appointmentId': appointmentId,
       'paymentDate': paymentDate?.toIso8601String(),
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'created_at': created_at.toIso8601String(),
+      'updated_at': updated_at.toIso8601String(),
     };
   }
 }
@@ -657,8 +826,8 @@ class Payment extends PaymentSimple {
     super.consultationId,
     super.appointmentId,
     super.paymentDate,
-    required super.createdAt,
-    required super.updatedAt,
+    required super.created_at,
+    required super.updated_at,
     this.user,
     this.consultation,
     this.appointment,
@@ -677,8 +846,8 @@ class Payment extends PaymentSimple {
       consultationId: map['consultationId'] as int?,
       appointmentId: map['appointmentId'] as int?,
       paymentDate: map['paymentDate'] != null ? DateTime.parse(map['paymentDate'] as String) : null,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
       user: map['user'] != null ? User.fromMap(map['user'] as Map<String, dynamic>) : null,
       consultation: map['consultation'] != null ? ConsultationSimple.fromMap(map['consultation'] as Map<String, dynamic>) : null,
       appointment: map['appointment'] != null ? AppointmentSimple.fromMap(map['appointment'] as Map<String, dynamic>) : null,
@@ -718,8 +887,8 @@ class AppointmentSimple {
   final String? patientNotes;
   final String? doctorNotes;
   final int? paymentId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime created_at;
+  final DateTime updated_at;
 
   AppointmentSimple({
     required this.id,
@@ -731,8 +900,8 @@ class AppointmentSimple {
     this.patientNotes,
     this.doctorNotes,
     this.paymentId,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.created_at,
+    required this.updated_at,
   });
 
   factory AppointmentSimple.fromMap(Map<String, dynamic> map) {
@@ -746,8 +915,8 @@ class AppointmentSimple {
       patientNotes: map['patientNotes'] as String?,
       doctorNotes: map['doctorNotes'] as String?,
       paymentId: map['paymentId'] as int?,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
     );
   }
 
@@ -762,8 +931,8 @@ class AppointmentSimple {
       'patientNotes': patientNotes,
       'doctorNotes': doctorNotes,
       'paymentId': paymentId,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'created_at': created_at.toIso8601String(),
+      'updated_at': updated_at.toIso8601String(),
     };
   }
 }
@@ -784,8 +953,8 @@ class Appointment extends AppointmentSimple {
     super.patientNotes,
     super.doctorNotes,
     super.paymentId,
-    required super.createdAt,
-    required super.updatedAt,
+    required super.created_at,
+    required super.updated_at,
     this.patient,
     this.doctor,
     this.payment,
@@ -802,8 +971,8 @@ class Appointment extends AppointmentSimple {
       patientNotes: map['patientNotes'] as String?,
       doctorNotes: map['doctorNotes'] as String?,
       paymentId: map['paymentId'] as int?,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
       patient: map['patient'] != null ? User.fromMap(map['patient'] as Map<String, dynamic>) : null,
       doctor: map['doctor'] != null ? DoctorProfile.fromMap(map['doctor'] as Map<String, dynamic>) : null,
       payment: map['payment'] != null ? PaymentSimple.fromMap(map['payment'] as Map<String, dynamic>) : null,
@@ -950,8 +1119,8 @@ class Prescription {
   final String medicationDetails;
   final String? instructions;
   final DateTime issueDate;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime created_at;
+  final DateTime updated_at;
   final User? patient;
   final User? doctor;
 
@@ -963,8 +1132,8 @@ class Prescription {
     required this.medicationDetails,
     this.instructions,
     required this.issueDate,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.created_at,
+    required this.updated_at,
     this.patient,
     this.doctor,
   });
@@ -978,8 +1147,8 @@ class Prescription {
       medicationDetails: map['medicationDetails'] as String,
       instructions: map['instructions'] as String?,
       issueDate: DateTime.parse(map['issueDate'] as String),
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
       patient: map['patient'] != null ? User.fromMap(map['patient'] as Map<String, dynamic>) : null,
       doctor: map['doctor'] != null ? User.fromMap(map['doctor'] as Map<String, dynamic>) : null,
     );
@@ -994,8 +1163,8 @@ class Prescription {
       'medicationDetails': medicationDetails,
       'instructions': instructions,
       'issueDate': issueDate.toIso8601String().split('T')[0], // Only date
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'created_at': created_at.toIso8601String(),
+      'updated_at': updated_at.toIso8601String(),
       'patient': patient?.toMap(),
       'doctor': doctor?.toMap(),
     };
@@ -1024,8 +1193,8 @@ class ConsultationSimple {
   final DateTime? endTime;
   final String status;
   final int? paymentId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime created_at;
+  final DateTime updated_at;
 
   ConsultationSimple({
     required this.id,
@@ -1035,8 +1204,8 @@ class ConsultationSimple {
     this.endTime,
     required this.status,
     this.paymentId,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.created_at,
+    required this.updated_at,
   });
 
   factory ConsultationSimple.fromMap(Map<String, dynamic> map) {
@@ -1048,8 +1217,8 @@ class ConsultationSimple {
       endTime: map['endTime'] != null ? DateTime.parse(map['endTime'] as String) : null,
       status: map['status'] as String,
       paymentId: map['paymentId'] as int?,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
     );
   }
 
@@ -1062,8 +1231,8 @@ class ConsultationSimple {
       'endTime': endTime?.toIso8601String(),
       'status': status,
       'paymentId': paymentId,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'created_at': created_at.toIso8601String(),
+      'updated_at': updated_at.toIso8601String(),
     };
   }
 }
@@ -1084,8 +1253,8 @@ class Consultation extends ConsultationSimple {
     super.endTime,
     required super.status,
     super.paymentId,
-    required super.createdAt,
-    required super.updatedAt,
+    required super.created_at,
+    required super.updated_at,
     this.patient,
     this.doctor,
     required this.messages,
@@ -1102,8 +1271,8 @@ class Consultation extends ConsultationSimple {
       endTime: map['endTime'] != null ? DateTime.parse(map['endTime'] as String) : null,
       status: map['status'] as String,
       paymentId: map['paymentId'] as int?,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
       patient: map['patient'] != null ? User.fromMap(map['patient'] as Map<String, dynamic>) : null,
       doctor: map['doctor'] != null ? User.fromMap(map['doctor'] as Map<String, dynamic>) : null,
       messages: (map['messages'] as List<dynamic>?)?.map((e) => Message.fromMap(e as Map<String, dynamic>)).toList() ?? [],
@@ -1140,8 +1309,8 @@ class Faq {
   final String answer;
   final String? category;
   final int? createdByAdminId;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime created_at;
+  final DateTime updated_at;
   final User? createdByAdmin; // Admin user who created it
 
   Faq({
@@ -1150,8 +1319,8 @@ class Faq {
     required this.answer,
     this.category,
     this.createdByAdminId,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.created_at,
+    required this.updated_at,
     this.createdByAdmin,
   });
 
@@ -1162,8 +1331,8 @@ class Faq {
       answer: map['answer'] as String,
       category: map['category'] as String?,
       createdByAdminId: map['createdByAdminId'] as int?,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
       createdByAdmin: map['createdByAdmin'] != null ? User.fromMap(map['createdByAdmin'] as Map<String, dynamic>) : null,
     );
   }
@@ -1175,8 +1344,8 @@ class Faq {
       'answer': answer,
       'category': category,
       'createdByAdminId': createdByAdminId,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'created_at': created_at.toIso8601String(),
+      'updated_at': updated_at.toIso8601String(),
       'createdByAdmin': createdByAdmin?.toMap(),
     };
   }
@@ -1198,8 +1367,8 @@ class PublicQuestion {
   final int authorUserId;
   final String title;
   final String details;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime created_at;
+  final DateTime updated_at;
   final User? author;
   final List<PublicQuestionAnswer> answers;
 
@@ -1208,8 +1377,8 @@ class PublicQuestion {
     required this.authorUserId,
     required this.title,
     required this.details,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.created_at,
+    required this.updated_at,
     this.author,
     required this.answers,
   });
@@ -1220,8 +1389,8 @@ class PublicQuestion {
       authorUserId: map['authorUserId'] as int,
       title: map['title'] as String,
       details: map['details'] as String,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
       author: map['author'] != null ? User.fromMap(map['author'] as Map<String, dynamic>) : null,
       answers: (map['answers'] as List<dynamic>?)?.map((e) => PublicQuestionAnswer.fromMap(e as Map<String, dynamic>)).toList() ?? [],
     );
@@ -1233,8 +1402,8 @@ class PublicQuestion {
       'authorUserId': authorUserId,
       'title': title,
       'details': details,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'created_at': created_at.toIso8601String(),
+      'updated_at': updated_at.toIso8601String(),
       'author': author?.toMap(),
       'answers': answers.map((e) => e.toMap()).toList(),
     };
@@ -1256,8 +1425,8 @@ class PublicQuestionAnswer {
   final int questionId;
   final int authorUserId;
   final String answerText;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime created_at;
+  final DateTime updated_at;
   final User? author; // Author can be a patient or doctor
 
   PublicQuestionAnswer({
@@ -1265,8 +1434,8 @@ class PublicQuestionAnswer {
     required this.questionId,
     required this.authorUserId,
     required this.answerText,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.created_at,
+    required this.updated_at,
     this.author,
   });
 
@@ -1276,8 +1445,8 @@ class PublicQuestionAnswer {
       questionId: map['questionId'] as int,
       authorUserId: map['authorUserId'] as int,
       answerText: map['answerText'] as String,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
       author: map['author'] != null ? User.fromMap(map['author'] as Map<String, dynamic>) : null,
     );
   }
@@ -1288,8 +1457,8 @@ class PublicQuestionAnswer {
       'questionId': questionId,
       'authorUserId': authorUserId,
       'answerText': answerText,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'created_at': created_at.toIso8601String(),
+      'updated_at': updated_at.toIso8601String(),
       'author': author?.toMap(),
     };
   }
@@ -1314,9 +1483,9 @@ class BlogPost {
   final String? featuredImageUrl;
   final String? videoUrl;
   final String status;
-  final DateTime? publishedAt;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? published_at;
+  final DateTime created_at;
+  final DateTime updated_at;
   final DoctorProfile? authorDoctor;
   final List<BlogComment> comments;
 
@@ -1328,9 +1497,9 @@ class BlogPost {
     this.featuredImageUrl,
     this.videoUrl,
     required this.status,
-    this.publishedAt,
-    required this.createdAt,
-    required this.updatedAt,
+    this.published_at,
+    required this.created_at,
+    required this.updated_at,
     this.authorDoctor,
     required this.comments,
   });
@@ -1344,9 +1513,9 @@ class BlogPost {
       featuredImageUrl: map['featuredImageUrl'] as String?,
       videoUrl: map['videoUrl'] as String?,
       status: map['status'] as String,
-      publishedAt: map['publishedAt'] != null ? DateTime.parse(map['publishedAt'] as String) : null,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      published_at: map['published_at'] != null ? DateTime.parse(map['published_at'] as String) : null,
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
       authorDoctor: map['authorDoctor'] != null ? DoctorProfile.fromMap(map['authorDoctor'] as Map<String, dynamic>) : null,
       comments: (map['comments'] as List<dynamic>?)?.map((e) => BlogComment.fromMap(e as Map<String, dynamic>)).toList() ?? [],
     );
@@ -1361,9 +1530,9 @@ class BlogPost {
       'featuredImageUrl': featuredImageUrl,
       'videoUrl': videoUrl,
       'status': status,
-      'publishedAt': publishedAt?.toIso8601String(),
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'published_at': published_at?.toIso8601String(),
+      'created_at': created_at.toIso8601String(),
+      'updated_at': updated_at.toIso8601String(),
       'authorDoctor': authorDoctor?.toMap(),
       'comments': comments.map((e) => e.toMap()).toList(),
     };
@@ -1385,8 +1554,8 @@ class BlogComment {
   final int postId;
   final int authorUserId;
   final String commentText;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime created_at;
+  final DateTime updated_at;
   final User? author;
 
   BlogComment({
@@ -1394,8 +1563,8 @@ class BlogComment {
     required this.postId,
     required this.authorUserId,
     required this.commentText,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.created_at,
+    required this.updated_at,
     this.author,
   });
 
@@ -1405,8 +1574,8 @@ class BlogComment {
       postId: map['postId'] as int,
       authorUserId: map['authorUserId'] as int,
       commentText: map['commentText'] as String,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      created_at: DateTime.parse(map['created_at'] as String),
+      updated_at: DateTime.parse(map['updated_at'] as String),
       author: map['author'] != null ? User.fromMap(map['author'] as Map<String, dynamic>) : null,
     );
   }
@@ -1417,8 +1586,8 @@ class BlogComment {
       'postId': postId,
       'authorUserId': authorUserId,
       'commentText': commentText,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'created_at': created_at.toIso8601String(),
+      'updated_at': updated_at.toIso8601String(),
       'author': author?.toMap(),
     };
   }
@@ -3367,7 +3536,7 @@ class _PatientDashboardScreenState extends State<PatientDashboardScreen> with Si
               children: [
                 Text('سؤالي: ${question.title}', style: const TextStyle(fontWeight: FontWeight.bold)),
                 Text('التفاصيل: ${question.details}'),
-                Text('تاريخ الطرح: ${DateFormat('yyyy-MM-dd HH:mm').format(question.createdAt)}'),
+                Text('تاريخ الطرح: ${DateFormat('yyyy-MM-dd HH:mm').format(question.created_at)}'),
                 const Text('الإجابات:', style: TextStyle(fontWeight: FontWeight.bold)),
                 if (question.answers.isEmpty)
                   const Text('  لا توجد إجابات بعد.')
@@ -3401,7 +3570,7 @@ class _PatientDashboardScreenState extends State<PatientDashboardScreen> with Si
               children: [
                 Text('العنوان: ${post.title}', style: const TextStyle(fontWeight: FontWeight.bold)),
                 Text('الكاتب: د. ${post.authorDoctor?.user?.name ?? 'غير معروف'}'),
-                Text('تاريخ النشر: ${post.publishedAt != null ? DateFormat('yyyy-MM-dd').format(post.publishedAt!) : 'غير منشور'}'),
+                Text('تاريخ النشر: ${post.published_at != null ? DateFormat('yyyy-MM-dd').format(post.published_at!) : 'غير منشور'}'),
                 Text('المحتوى (مختصر): ${post.content.length > 100 ? '${post.content.substring(0, 100)}...' : post.content}'),
                 // You might add a button to view full post details or comments
               ],
@@ -3907,7 +4076,7 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> with Sing
                           children: [
                             Text('العنوان: ${post.title}', style: const TextStyle(fontWeight: FontWeight.bold)),
                             Text('الحالة: ${post.status}'),
-                            Text('تاريخ النشر: ${post.publishedAt != null ? DateFormat('yyyy-MM-dd').format(post.publishedAt!) : 'غير منشور'}'),
+                            Text('تاريخ النشر: ${post.published_at != null ? DateFormat('yyyy-MM-dd').format(post.published_at!) : 'غير منشور'}'),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -3956,3 +4125,5 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> with Sing
     ```
 
 الآن يجب أن يعمل التطبيق، وتظهر شاشة تسجيل الدخول. يمكنك استخدام الأزرار السريعة لتسجيل الدخول بأدوار مختلفة وتجربة الواجهات الأولية. سيتم طباعة جميع استجابات الـ API في نافذة "Debug Console" في محرر الأكواد لديك.
+
+
